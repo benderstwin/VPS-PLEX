@@ -1,3 +1,4 @@
+#!/bin/bash
 read -p "new username: " traefikuser
 useradd -m -s /bin/bash $traefikuser
 htpasswd -n $traefikuser password > /docker/apps/htpd
