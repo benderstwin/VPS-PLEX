@@ -1,7 +1,9 @@
-version: '2'
-container_name: portainer
+
+version: '3'
+
 services:
   portainer:
+    container_name: portainer
     image: portainer/portainer
     ports:
       - "9000:9000"
