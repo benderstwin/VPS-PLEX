@@ -3,12 +3,23 @@ version: '3'
 
 services:
   portainer:
+    restart: always
     container_name: portainer
     image: portainer/portainer
-    ports:
-      - "9000:9000"
+    expose:
+      - "9000"
+    networks: 
+      - proxy
+    labels:
+    - "traefik.docker.network=proxy"
+    - "traefik.enable=true"
+    - "traefik.basic.frontend.rule=Host:hostnamedomain"
+    - "traefik.basic.port=9000"
+    - "traefik.basic.protocol=http"
     command: -H unix:///var/run/docker.sock
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /docker/apps/portainer:/data
-
+networks:
+  proxy:
+    external: true
